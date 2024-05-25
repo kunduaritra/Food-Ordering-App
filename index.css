@@ -64,3 +64,15 @@
   margin: 10px;
   background-color: #f0f0f0;
 }
+
+.filter {
+  display: flex;
+}
+
+.search-btn {
+  cursor: pointer;
+}
+
+.top-res-btn {
+  cursor: pointer;
+}
