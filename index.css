@@ -2,6 +2,7 @@
   display: flex;
   justify-content: space-between;
   border: 2px solid black;
+  background-color: #fff4d8;
 }
 
 .logo {
@@ -49,4 +50,17 @@
 .res-logo {
   height: 200px;
   width: 200px;
+}
+
+.shimmer-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.shimmer-card {
+  height: 350px;
+  width: 200px;
+  padding: 5px;
+  margin: 10px;
+  background-color: #f0f0f0;
 }
