@@ -76,3 +76,9 @@
 .top-res-btn {
   cursor: pointer;
 }
+
+.usercard {
+  border: 1px solid black;
+  padding: 5px;
+  margin: 10px;
+}
