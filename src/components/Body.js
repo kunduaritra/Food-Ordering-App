@@ -18,7 +18,6 @@ const Body = () => {
       "https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.4485835&lng=78.39080349999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
     );
     const res = await data.json();
-
     setListOfRestaurent(
       res?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
@@ -42,18 +41,19 @@ const Body = () => {
     <Shimmer />
   ) : (
     <div className="body">
-      <div className="filter">
-        <div className="search">
+      {console.log(listOfRestaurent)}
+      <div className="filter flex items-center">
+        <div className="p-2 mx-4">
           <input
             type="text"
-            className="search-box"
+            className="border border-solid border-black"
             value={searchText}
             onChange={(e) => {
               setSearchText(e.target.value);
             }}
           />
           <button
-            className="search-btn"
+            className="px-4 py-1 m-4 bg-green-400 rounded-md hover:font-bold"
             onClick={() => {
               const searchElem = listOfRestaurent.filter((res) =>
                 res.info.name.toLowerCase().includes(searchText.toLowerCase())
@@ -66,7 +66,7 @@ const Body = () => {
         </div>
         <div className="top-res">
           <button
-            className="top-res-btn"
+            className="top-res-btn bg-yellow-400 m-4 px-4 py-1 rounded-md hover:font-bold"
             onClick={() => {
               const filteredList = filteredRestaurent.filter(
                 (res) => res.info.avgRating >= 4
@@ -78,12 +78,13 @@ const Body = () => {
           </button>
         </div>
       </div>
-      <div className="res-container">
+      <div className="res-container flex flex-wrap px-4 m-4">
         {filteredRestaurent.map((restaurant) => (
           <Link
             to={"/restaurent/" + restaurant.info.id}
             key={restaurant.info.id}
           >
+            {/* if the restaurent promoted is true then add promoted label to it */}
             <RestaurantCard key={restaurant.info.id} resData={restaurant} />
           </Link>
         ))}

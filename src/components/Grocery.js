@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { CDN_URL } from "../utils/constants";
 import Shimmer from "./Shimmer";
+import GroceryShimmer from "./GroceryShimmer";
 
 const Grocery = () => {
   const [groceryInfo, setGroceryInfo] = useState(null);
@@ -17,15 +18,17 @@ const Grocery = () => {
     setGroceryInfo(dataJson?.data?.widgets[1]?.data);
   };
   if (groceryInfo === null) {
-    return <Shimmer />;
+    return <GroceryShimmer />;
   }
   return (
     <>
-      <div className="grocery-list">
+      <div className="flex flex-wrap justify-center items-center m-4 p-4">
         {groceryInfo.map((info) => (
-          <div className="grocery-info">
+          <div className="grocery-info cursor-pointer m-2 p-2 w-28">
             <img src={CDN_URL + info.imageId} />
-            <h5>{info.displayName}</h5>
+            <h5 className="text-center text-sm mt-4 font-bold font-sans">
+              {info.displayName}
+            </h5>
           </div>
         ))}
       </div>

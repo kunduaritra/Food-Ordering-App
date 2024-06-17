@@ -5,26 +5,26 @@ import useOnlineStatus from "../utils/useOnlineStatus";
 const Header = () => {
   const onlineStatus = useOnlineStatus();
   return (
-    <div className="header">
-      <div className="logo-container">
-        <img className="logo" src={LOGO_URL} />
+    <div className="sticky top-0 flex items-center justify-between bg-[#FFF4D8] drop-shadow-lg">
+      <div className="ml-28">
+        <img className="w-28" src={LOGO_URL} />
       </div>
       <div className="nav-items">
-        <ul>
-          <li>Online Status: {onlineStatus ? "✅" : "❌"}</li>
-          <li>
+        <ul className="flex p-4 m-4">
+          <li className="mx-4">Online Status: {onlineStatus ? "✅" : "❌"}</li>
+          <li className="mx-4">
             <Link to="/">Home</Link>
           </li>
-          <li>
+          <li className="mx-4">
             <Link to="/about">About Us</Link>
           </li>
-          <li>
+          <li className="mx-4">
             <Link to="/contact">Contact Us</Link>
           </li>
-          <li>
+          <li className="mx-4">
             <Link to="/grocery">Grocery</Link>
           </li>
-          <li>Cart</li>
+          <li className="mx-4">Cart</li>
         </ul>
       </div>
     </div>

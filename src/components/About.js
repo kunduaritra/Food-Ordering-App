@@ -12,8 +12,8 @@ class About extends Component {
 
   render() {
     return (
-      <div>
-        <h1>About Page</h1>
+      <div className="bg-slate-100 h-[80vh]">
+        <h1 className="py-5 text-center text-2xl font-bold">About</h1>
         <UserClass />
       </div>
     );
