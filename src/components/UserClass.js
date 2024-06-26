@@ -1,6 +1,7 @@
 import React from "react";
 import { FaFacebook, FaLinkedin, FaGithubSquare } from "react-icons/fa";
 import { FaSquareXTwitter } from "react-icons/fa6";
+import UserContext from "../utils/UserContext";
 
 class UserClass extends React.Component {
   constructor(props) {
@@ -17,7 +18,6 @@ class UserClass extends React.Component {
     // API Calls
     const data = await fetch("https://api.github.com/users/kunduaritra");
     const jsonData = await data.json();
-    console.log(jsonData);
     this.setState({
       userProfile: jsonData,
     });
@@ -77,6 +77,13 @@ class UserClass extends React.Component {
                 <FaSquareXTwitter className="h-9 w-9 text-black" />
               </a>
             </div>
+            <UserContext.Consumer>
+              {(data) => (
+                <h1 className="text-sm text-green-500 mt-8">
+                  Logged User: {data.loggedInUser}
+                </h1>
+              )}
+            </UserContext.Consumer>
           </div>
 
           {/* <h1>Count: {count}</h1>

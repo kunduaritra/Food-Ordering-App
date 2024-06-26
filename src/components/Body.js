@@ -1,7 +1,8 @@
+import UserContext from "../utils/UserContext";
 import useOnlineStatus from "../utils/useOnlineStatus";
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard, { withPromotedLabel } from "./RestaurantCard";
 import Shimmer from "./Shimmer";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const Body = () => {
@@ -9,14 +10,29 @@ const Body = () => {
   const [filteredRestaurent, setFilteredRestaurent] = useState([]);
   const [searchText, setSearchText] = useState("");
 
+  const RestaurentCardPromoted = withPromotedLabel(RestaurantCard);
+
+  const { loggedInUser, setUserName } = useContext(UserContext);
+
   useEffect(() => {
     fetchData();
   }, []);
 
   const fetchData = async () => {
-    const data = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.4485835&lng=78.39080349999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
-    );
+    // const data = await fetch(
+    //   "https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.4485835&lng=78.39080349999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+    // );
+
+    const data = await fetch("https://handler-cors.vercel.app/fetch", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        url: "https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.4485835&lng=78.39080349999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING",
+      }),
+    });
+
     const res = await data.json();
     setListOfRestaurent(
       res?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
@@ -76,6 +92,13 @@ const Body = () => {
           >
             Top Rated Restaurant
           </button>
+          {/* USERNAME SETTER */}
+          <input
+            type="text"
+            className="border border-gray-300 px-2"
+            value={loggedInUser}
+            onChange={(e) => setUserName(e.target.value)}
+          />
         </div>
       </div>
       <div className="res-container flex flex-wrap px-4 m-4">
@@ -85,7 +108,11 @@ const Body = () => {
             key={restaurant.info.id}
           >
             {/* if the restaurent promoted is true then add promoted label to it */}
-            <RestaurantCard key={restaurant.info.id} resData={restaurant} />
+            {restaurant.info.id == "10492" || restaurant.info.id == "33422" ? (
+              <RestaurentCardPromoted resData={restaurant} />
+            ) : (
+              <RestaurantCard resData={restaurant} />
+            )}
           </Link>
         ))}
       </div>

@@ -7,7 +7,7 @@ class About extends Component {
   }
 
   componentDidMount() {
-    console.log("Parent Component Mount");
+    // console.log("Parent Component Mount");
   }
 
   render() {
