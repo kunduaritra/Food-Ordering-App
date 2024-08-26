@@ -2,8 +2,14 @@ import React from "react";
 import { CDN_URL } from "../utils/constants";
 import NonVegSVG from "../utils/NonVegSVG";
 import VegSVG from "../utils/VegSVG";
+import { useDispatch } from "react-redux";
+import { addItems } from "../utils/store/CartSlice";
 
 const MenuItemList = ({ items }) => {
+  const dispatch = useDispatch();
+  const handleAddItem = (item) => {
+    dispatch(addItems(item.card.info));
+  };
   return (
     <div>
       {items.map((item) => (
@@ -44,7 +50,10 @@ const MenuItemList = ({ items }) => {
               src={CDN_URL + item.card.info.imageId}
             />
             <div className="absolute my-[-30] mx-10">
-              <button className="bg-orange-500 hover:bg-green-500 text-white font-bold rounded-xl px-4 shadow-xl">
+              <button
+                onClick={() => handleAddItem(item)}
+                className="bg-orange-500 hover:bg-green-500 text-white font-bold rounded-xl px-4 shadow-xl"
+              >
                 Add +
               </button>
             </div>

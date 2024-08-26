@@ -57,7 +57,6 @@ const Body = () => {
     <Shimmer />
   ) : (
     <div className="body">
-      {console.log(listOfRestaurent)}
       <div className="filter flex items-center">
         <div className="p-2 mx-4">
           <input

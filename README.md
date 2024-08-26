@@ -16,3 +16,11 @@
 - - Address
 - - Contact
     \*/
+
+#Redux / Toolkit
+-- Install @reduxjs/toolkit and react redux
+-- Build Store (Configure)
+-- Connect our store to the App
+-- Create Cart Slice to add item to the cart.
+-- dispatch action
+-- selector
